@@ -25,4 +25,11 @@ def search_by_tag(tag):
 
 # Requisito 9
 def search_by_category(category):
-    """Seu código deve vir aqui"""
+    notices = find_news()
+    response = []
+
+    for notice in notices:
+        if category.upper() in notice["category"].upper():
+            response.append((notice["title"], notice["url"]))
+
+    return response
