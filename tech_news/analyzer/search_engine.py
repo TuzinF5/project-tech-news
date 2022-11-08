@@ -1,7 +1,8 @@
-# Requisito 6
 from tech_news.database import find_news
+import datetime
 
 
+# Requisito 6
 def search_by_title(title):
     notices = find_news()
     response = []
@@ -15,7 +16,23 @@ def search_by_title(title):
 
 # Requisito 7
 def search_by_date(date):
-    """Seu código deve vir aqui"""
+    notices = find_news()
+    response = []
+
+    try:
+        bool(datetime.datetime.strptime(date, "%Y-%m-%d"))
+    except ValueError:
+        raise ValueError("Data inválida")
+
+    for notice in notices:
+        formatted_date = datetime.datetime.strptime(
+            notice["timestamp"], "%d/%m/%Y"
+        ).date()
+
+        if date == str(formatted_date):
+            response.append((notice["title"], notice["url"]))
+
+    return response
 
 
 # Requisito 8
