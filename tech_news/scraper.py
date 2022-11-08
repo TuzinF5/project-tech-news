@@ -34,7 +34,50 @@ def scrape_next_page_link(html_content):
 
 # Requisito 4
 def scrape_noticia(html_content):
-    """Seu código deve vir aqui"""
+    notice = dict()
+
+    selector = Selector(html_content)
+
+    url = selector.css("link[rel='canonical']::attr(href)").get()
+    notice["url"] = url
+
+    title = selector.css(".entry-title::text").get()
+
+    if title.endswith(" "):
+        title = title[:-1]
+
+    if title.endswith("\xa0\xa0\xa0"):
+        title = title[:-3]
+
+    notice["title"] = title
+
+    timestamp = selector.css(".meta-date::text").get()
+    notice["timestamp"] = timestamp
+
+    writer = selector.css(".url.fn.n::text").get()
+    notice["writer"] = writer
+
+    comments_count = selector.css(".comment-body").getall()
+    notice["comments_count"] = len(comments_count)
+
+    tags = selector.css("a[rel='tag']::text").getall()
+    notice["tags"] = tags
+
+    category = selector.css(".category-style span.label::text").get()
+    notice["category"] = category
+
+    summary = selector.css(
+        ".entry-content > p:nth-of-type(1) *::text"
+    ).getall()
+
+    summary = "".join(summary)
+
+    if summary.endswith(" ") or summary.endswith("\xa0"):
+        summary = summary[:-1]
+
+    notice["summary"] = summary
+
+    return notice
 
 
 # Requisito 5
