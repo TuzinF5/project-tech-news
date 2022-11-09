@@ -1,4 +1,5 @@
 import sys
+from tech_news.analyzer.ratings import top_5_news
 from tech_news.analyzer.search_engine import (
     search_by_category,
     search_by_date,
@@ -33,6 +34,10 @@ def analyzer_menu_search_by_category():
     print(search_by_category(title))
 
 
+def analyzer_menu_top_5_news():
+    print(top_5_news())
+
+
 # Requisito 12
 def analyzer_menu():
     displays_the_options = {
@@ -41,6 +46,7 @@ def analyzer_menu():
         "2": lambda: analyzer_menu_search_by_date(),
         "3": lambda: analyzer_menu_search_by_tag(),
         "4": lambda: analyzer_menu_search_by_category(),
+        "5": lambda: analyzer_menu_top_5_news(),
     }
 
     options_answer = input(
