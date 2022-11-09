@@ -27,4 +27,23 @@ def top_5_news():
 
 # Requisito 11
 def top_5_categories():
-    """Seu código deve vir aqui"""
+    notices = list(
+        db.news.aggregate(
+            [
+                {
+                    "$group": {
+                        "_id": "$category",
+                        "count": {"$sum": 1},
+                    },
+                },
+                {"$sort": {"count": -1, "_id": 1}},
+            ]
+        )
+    )
+
+    response = []
+
+    for notice in notices:
+        response.append(notice["_id"])
+
+    return response
