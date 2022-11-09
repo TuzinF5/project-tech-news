@@ -1,10 +1,16 @@
 import sys
+from tech_news.scraper import get_tech_news
+
+
+def analyzer_menu_get_tech_news():
+    amount = input("Digite quantas notícias serão buscadas:")
+    print(get_tech_news(int(amount)))
 
 
 # Requisito 12
 def analyzer_menu():
     displays_the_options = {
-        "0": "Digite quantas notícias serão buscadas:",
+        "0": lambda: analyzer_menu_get_tech_news(),
         "1": "Digite o título:",
         "2": "Digite a data no formato aaaa-mm-dd:",
         "3": "Digite a tag:",
@@ -28,6 +34,6 @@ def analyzer_menu():
         return
 
     try:
-        input(displays_the_options[options_answer])
+        displays_the_options[options_answer]()
     except KeyError:
         print(sys.stderr.write("Opção inválida\n"))
