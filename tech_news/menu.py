@@ -1,5 +1,9 @@
 import sys
-from tech_news.analyzer.search_engine import search_by_date, search_by_title
+from tech_news.analyzer.search_engine import (
+    search_by_date,
+    search_by_tag,
+    search_by_title,
+)
 from tech_news.scraper import get_tech_news
 
 
@@ -18,13 +22,18 @@ def analyzer_menu_search_by_date():
     print(search_by_date(title))
 
 
+def analyzer_menu_search_by_tag():
+    title = input("Digite a tag:")
+    print(search_by_tag(title))
+
+
 # Requisito 12
 def analyzer_menu():
     displays_the_options = {
         "0": lambda: analyzer_menu_get_tech_news(),
         "1": lambda: analyzer_menu_search_by_title(),
         "2": lambda: analyzer_menu_search_by_date(),
-        "3": "Digite a tag:",
+        "3": lambda: analyzer_menu_search_by_tag(),
         "4": "Digite a categoria:",
     }
 
