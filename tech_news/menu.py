@@ -52,6 +52,7 @@ def analyzer_menu():
         "4": lambda: analyzer_menu_search_by_category(),
         "5": lambda: analyzer_menu_top_5_news(),
         "6": lambda: analyzer_menu_top_5_categories(),
+        "7": lambda: print("Encerrando script"),
     }
 
     options_answer = input(
@@ -65,10 +66,6 @@ def analyzer_menu():
         " 6 - Listar top 5 categorias;\n"
         " 7 - Sair.\n"
     )
-
-    if options_answer == "7":
-        print("Encerrando script")
-        return
 
     try:
         displays_the_options[options_answer]()
