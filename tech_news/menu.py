@@ -1,5 +1,6 @@
 import sys
 from tech_news.analyzer.search_engine import (
+    search_by_category,
     search_by_date,
     search_by_tag,
     search_by_title,
@@ -27,6 +28,11 @@ def analyzer_menu_search_by_tag():
     print(search_by_tag(title))
 
 
+def analyzer_menu_search_by_category():
+    title = input("Digite a categoria:")
+    print(search_by_category(title))
+
+
 # Requisito 12
 def analyzer_menu():
     displays_the_options = {
@@ -34,7 +40,7 @@ def analyzer_menu():
         "1": lambda: analyzer_menu_search_by_title(),
         "2": lambda: analyzer_menu_search_by_date(),
         "3": lambda: analyzer_menu_search_by_tag(),
-        "4": "Digite a categoria:",
+        "4": lambda: analyzer_menu_search_by_category(),
     }
 
     options_answer = input(
