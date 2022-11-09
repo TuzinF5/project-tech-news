@@ -1,4 +1,5 @@
 import sys
+from tech_news.analyzer.search_engine import search_by_title
 from tech_news.scraper import get_tech_news
 
 
@@ -7,11 +8,16 @@ def analyzer_menu_get_tech_news():
     print(get_tech_news(int(amount)))
 
 
+def analyzer_menu_search_by_title():
+    title = input("Digite o título:")
+    print(search_by_title(title))
+
+
 # Requisito 12
 def analyzer_menu():
     displays_the_options = {
         "0": lambda: analyzer_menu_get_tech_news(),
-        "1": "Digite o título:",
+        "1": lambda: analyzer_menu_search_by_title(),
         "2": "Digite a data no formato aaaa-mm-dd:",
         "3": "Digite a tag:",
         "4": "Digite a categoria:",
