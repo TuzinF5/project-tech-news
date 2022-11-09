@@ -23,6 +23,10 @@ def analyzer_menu():
         " 7 - Sair.\n"
     )
 
+    if options_answer == "7":
+        print("Encerrando script")
+        return
+
     try:
         input(displays_the_options[options_answer])
     except KeyError:
