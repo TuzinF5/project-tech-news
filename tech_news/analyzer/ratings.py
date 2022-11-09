@@ -1,10 +1,12 @@
-from tech_news.database import db
+from tech_news.database import get_collection
 
 
 # Requisito 10
 def top_5_news():
-    notices = list(
-        db.news.find(
+    news_collection = get_collection()
+
+    five_news = list(
+        news_collection.find(
             {},
             {
                 "_id": False,
@@ -17,18 +19,20 @@ def top_5_news():
         .limit(5)
     )
 
-    response = []
+    five_formatted_news = []
 
-    for notice in notices:
-        response.append((notice["title"], notice["url"]))
+    for notice in five_news:
+        five_formatted_news.append((notice["title"], notice["url"]))
 
-    return response
+    return five_formatted_news
 
 
 # Requisito 11
 def top_5_categories():
-    notices = list(
-        db.news.aggregate(
+    news_collection = get_collection()
+
+    ranking_categories = list(
+        news_collection.aggregate(
             [
                 {
                     "$group": {
@@ -41,9 +45,9 @@ def top_5_categories():
         )
     )
 
-    response = []
+    categories = []
 
-    for notice in notices:
-        response.append(notice["_id"])
+    for notice in ranking_categories:
+        categories.append(notice["_id"])
 
-    return response
+    return categories
